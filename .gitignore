@@ -1,0 +1,5 @@
+/.idea
+/cmake-build-debug
+**/*.o
+/htw_media-manager-2
+/ui_media-manager.h
