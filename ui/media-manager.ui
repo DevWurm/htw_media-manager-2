@@ -26,245 +26,168 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="media_widget">
      <attribute name="title">
       <string>Media</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>1101</width>
-        <height>461</height>
+        <x>0</x>
+        <y>0</y>
+        <width>1111</width>
+        <height>543</height>
        </rect>
       </property>
-      <property name="minimumSize">
-       <size>
-        <width>1101</width>
-        <height>461</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1101</width>
-        <height>461</height>
-       </size>
-      </property>
-      <property name="rowCount">
-       <number>0</number>
-      </property>
-      <property name="columnCount">
-       <number>6</number>
-      </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderCascadingSectionResizes">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>180</number>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Title</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Creator</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Year</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Type</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Borrower</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>401</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="placeholderText">
-       <string>Title</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
-      <property name="geometry">
-       <rect>
-        <x>430</x>
-        <y>10</y>
-        <width>291</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="placeholderText">
-       <string>Creator</string>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateEdit">
-      <property name="geometry">
-       <rect>
-        <x>740</x>
-        <y>10</y>
-        <width>110</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="date">
-       <date>
-        <year>2017</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-      <property name="currentSection">
-       <enum>QDateTimeEdit::YearSection</enum>
-      </property>
-      <property name="displayFormat">
-       <string>yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>860</x>
-        <y>10</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Book</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Film</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>1010</x>
-        <y>10</y>
-        <width>91</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="medium_input">
+         <item>
+          <widget class="QLineEdit" name="title_input">
+           <property name="placeholderText">
+            <string>Title</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="creator_input">
+           <property name="placeholderText">
+            <string>Creator</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="year_input">
+           <property name="date">
+            <date>
+             <year>2017</year>
+             <month>1</month>
+             <day>1</day>
+            </date>
+           </property>
+           <property name="currentSection">
+            <enum>QDateTimeEdit::YearSection</enum>
+           </property>
+           <property name="displayFormat">
+            <string>yyyy</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="type_input">
+           <item>
+            <property name="text">
+             <string>Book</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Film</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="add_medium_button">
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="delete_medium_button">
+         <property name="text">
+          <string>Delete</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="media_table">
+         <property name="minimumSize">
+          <size>
+           <width>1101</width>
+           <height>461</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1101</width>
+           <height>461</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="contacts_tab">
      <attribute name="title">
       <string>Contacts</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_2">
+     <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>50</y>
-        <width>1101</width>
-        <height>501</height>
+        <x>0</x>
+        <y>0</y>
+        <width>1121</width>
+        <height>553</height>
        </rect>
       </property>
-      <property name="minimumSize">
-       <size>
-        <width>1101</width>
-        <height>471</height>
-       </size>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>400</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>28</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Firstname</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Lastname</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>271</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="placeholderText">
-       <string>Firstname</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_4">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>10</y>
-        <width>271</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="placeholderText">
-       <string>Lastname</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>10</y>
-        <width>91</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="contact_inputs">
+         <item>
+          <widget class="QLineEdit" name="lastname_input">
+           <property name="placeholderText">
+            <string>Lastname</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="firstname_input">
+           <property name="placeholderText">
+            <string>Firstname</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="add_contact_button">
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="delete_contact_button">
+         <property name="text">
+          <string>Delete</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="contacts_table">
+         <property name="minimumSize">
+          <size>
+           <width>1101</width>
+           <height>471</height>
+          </size>
+         </property>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>400</number>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -286,6 +209,17 @@
    <addaction name="menuMedia_Manager_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>
