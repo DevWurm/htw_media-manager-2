@@ -3,3 +3,5 @@
 **/*.o
 /htw_media-manager-2
 /ui_media-manager.h
+/moc_*.cpp
+/Makefile
