@@ -4,17 +4,13 @@
 
 #ifndef HTW_MEDIA_MANAGER_2_CONTACTTABLEMODEL_H
 
-#include <QAbstractTableModel>
-#include <QList>
 #include "domain/Contact.h"
+#include "AbstractListModel.h"
 
-class ContactTableModel: public QAbstractTableModel {
-private:
-    QList<Contact>& contacts;
+class ContactTableModel: public AbstractListModel<Contact> {
 public:
-    ContactTableModel(QList<Contact>& contacts, QObject * parent = 0): QAbstractTableModel(parent), contacts(contacts){};
+    ContactTableModel(QList<Contact>& model, QObject * parent = 0): AbstractListModel<Contact>(model, parent) {};
 
-    int rowCount(const QModelIndex& parent) const;
     int columnCount(const QModelIndex& parent) const;
     QVariant data(const QModelIndex &index, int role) const;
 };
