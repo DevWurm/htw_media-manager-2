@@ -3,6 +3,7 @@
 
 #include "models/domain/Contact.h"
 #include "models/ContactTableModel.h"
+#include "controllers/ContactsController.h"
 #include <QList>
 
 
@@ -18,6 +19,9 @@ int main(int argc, char* argv[]) {
     data.append(Contact("Test1", "Test2"));
 
     ContactTableModel model(data);
+
+    ContactsController controller(ui, model);
+
 
     ui.contacts_table->setModel(&model);
 
