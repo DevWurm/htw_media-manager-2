@@ -9,10 +9,11 @@
 
 class ContactTableModel: public AbstractListModel<Contact> {
 public:
-    ContactTableModel(QList<Contact>& model, QObject * parent = 0): AbstractListModel<Contact>(model, parent) {};
+    ContactTableModel(QList <Contact> &model, QObject *parent = 0) : AbstractListModel<Contact>(model, parent) {};
 
-    int columnCount(const QModelIndex& parent) const;
+    int columnCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 };
 
 #define HTW_MEDIA_MANAGER_2_CONTACTTABLEMODEL_H
