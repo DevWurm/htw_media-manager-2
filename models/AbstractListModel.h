@@ -3,25 +3,27 @@
 //
 
 #ifndef HTW_MEDIA_MANAGER_2_COLLECTIONMODEL_H
-#define HTW_MEDIA_MANAGER_2_COLLECTIONMODEL_H
 
+#include <memory>
 #include <QAbstractTableModel>
 #include <QList>
+
+using namespace std;
 
 template <class T>
 class AbstractListModel: public QAbstractTableModel {
 protected:
-    QList<T>& model;
+    QList<shared_ptr<T>>& model;
 
 public:
-    AbstractListModel(QList<T>& model, QObject * parent = 0): QAbstractTableModel(parent), model(model){};
+    AbstractListModel(QList<shared_ptr<T>>& model, QObject * parent = 0): QAbstractTableModel(parent), model(model){};
 
     int rowCount(const QModelIndex& parent) const;
     int columnCount(const QModelIndex& parent) const = 0;
     QVariant data(const QModelIndex &index, int role) const = 0;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const = 0;
 
-    void addRow(const T& value);
+    void addRow(const shared_ptr<T>& value);
     void removeRow(const int row);
 };
 
@@ -31,7 +33,7 @@ int AbstractListModel<T>::rowCount(const QModelIndex &parent) const {
 }
 
 template <class T>
-void AbstractListModel<T>::addRow(const T &value) {
+void AbstractListModel<T>::addRow(const shared_ptr<T> &value) {
     beginInsertRows(QModelIndex(), model.size(), model.size());
 
     model.push_back(value);
@@ -48,4 +50,5 @@ void AbstractListModel<T>::removeRow(const int row) {
     endRemoveRows();
 }
 
+#define HTW_MEDIA_MANAGER_2_COLLECTIONMODEL_H
 #endif //HTW_MEDIA_MANAGER_2_COLLECTIONMODEL_H
