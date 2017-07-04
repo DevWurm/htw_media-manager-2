@@ -8,20 +8,18 @@
 #include <QAbstractButton>
 #include <QLineEdit>
 #include <QObject>
+#include <QTableView>
 
+#include "AbstractTableViewController.h"
 #include "../models/AbstractListModel.h"
 #include "../models/domain/Contact.h"
 #include "../ui_media-manager.h"
 
-class ContactsController: public QObject {
+class ContactsController: public AbstractTableViewController<Contact> {
     Q_OBJECT;
 private:
-    QAbstractButton &addContactButton;
-    QAbstractButton &deleteContactsButton;
     QLineEdit &firstnameInput;
     QLineEdit &lastnameInput;
-    QTableView &contactsTable;
-    AbstractListModel<Contact> &model;
 public:
     ContactsController(QPushButton &addContactButton,
                        QPushButton &deleteContactsButton,
@@ -29,16 +27,15 @@ public:
                        QLineEdit &lastnameInput,
                        QTableView &contactsTable,
                        AbstractListModel<Contact> &model
-    ) : addContactButton(addContactButton),
-        deleteContactsButton(deleteContactsButton),
+    ) : AbstractTableViewController(
+            addContactButton,
+            deleteContactsButton,
+            model,
+            contactsTable
+        ),
         firstnameInput(firstnameInput),
-        lastnameInput(lastnameInput),
-        contactsTable(contactsTable),
-        model(model) {
-
-        QObject::connect(&addContactButton, SIGNAL(clicked()), this, SLOT(addContact()));
-        QObject::connect(&deleteContactsButton, SIGNAL(clicked()), this, SLOT(deleteContacts()));
-    };
+        lastnameInput(lastnameInput)
+        {};
 
     ContactsController(Ui_MediaManager& ui, AbstractListModel<Contact> &model):
             ContactsController(
@@ -51,8 +48,7 @@ public:
             ){};
 
 public slots:
-    void addContact();
-    void deleteContacts();
+    void addItem();
 };
 
 #endif //HTW_MEDIA_MANAGER_2_CONTACTSCONTROLLER_H
