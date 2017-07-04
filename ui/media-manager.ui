@@ -120,6 +120,9 @@
            <height>461</height>
           </size>
          </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
         </widget>
        </item>
       </layout>
@@ -178,6 +181,9 @@
            <width>1101</width>
            <height>471</height>
           </size>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <attribute name="horizontalHeaderMinimumSectionSize">
           <number>400</number>
