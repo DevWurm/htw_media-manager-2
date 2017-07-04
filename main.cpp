@@ -7,6 +7,7 @@
 #include "controllers/ContactsController.h"
 #include "models/MediumTableModel.h"
 #include "controllers/MediaController.h"
+#include "delegates/ContactsComboboxDelegate.h"
 #include <QList>
 #include <memory>
 
@@ -28,6 +29,9 @@ int main(int argc, char* argv[]) {
     MediumTableModel mediaModel(mediaData);
     MediaController mediaController(ui, mediaModel);
     ui.media_table->setModel(&mediaModel);
+
+    ContactsComboboxDelegate comboboxDelegate(contactsData);
+    ui.media_table->setItemDelegateForColumn(4,&comboboxDelegate);
 
     window->show();
     return app.exec();
