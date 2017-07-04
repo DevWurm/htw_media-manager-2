@@ -2,9 +2,13 @@
 #include "ui_media-manager.h"
 
 #include "models/domain/Contact.h"
+#include "models/domain/Medium.h"
 #include "models/ContactTableModel.h"
 #include "controllers/ContactsController.h"
+#include "models/MediumTableModel.h"
+#include "controllers/MediaController.h"
 #include <QList>
+#include <memory>
 
 
 using namespace std;
@@ -15,15 +19,15 @@ int main(int argc, char* argv[]) {
     Ui::MediaManager ui;
     ui.setupUi(window);
 
-    QList<Contact> data;
-    data.append(Contact("Test1", "Test2"));
+    QList<shared_ptr<Contact>> contactsData;
+    ContactTableModel contactsModel(contactsData);
+    ContactsController contactsController(ui, contactsModel);
+    ui.contacts_table->setModel(&contactsModel);
 
-    ContactTableModel model(data);
-
-    ContactsController controller(ui, model);
-
-
-    ui.contacts_table->setModel(&model);
+    QList<shared_ptr<Medium>> mediaData;
+    MediumTableModel mediaModel(mediaData);
+    MediaController mediaController(ui, mediaModel);
+    ui.media_table->setModel(&mediaModel);
 
     window->show();
     return app.exec();
