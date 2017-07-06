@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1137</width>
-    <height>600</height>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,6 +123,18 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -145,16 +157,16 @@
        <item>
         <layout class="QHBoxLayout" name="contact_inputs">
          <item>
-          <widget class="QLineEdit" name="lastname_input">
+          <widget class="QLineEdit" name="firstname_input">
            <property name="placeholderText">
-            <string>Lastname</string>
+            <string>Firstname</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="firstname_input">
+          <widget class="QLineEdit" name="lastname_input">
            <property name="placeholderText">
-            <string>Firstname</string>
+            <string>Lastname</string>
            </property>
           </widget>
          </item>
@@ -185,11 +197,17 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>400</number>
+         </attribute>
          <attribute name="horizontalHeaderMinimumSectionSize">
           <number>400</number>
          </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>false</bool>
          </attribute>
         </widget>
        </item>
