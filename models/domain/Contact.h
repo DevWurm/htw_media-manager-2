@@ -8,14 +8,17 @@ using namespace std;
 
 class Contact {
 private:
+    const QString id;
     const QString firstname;
     const QString lastname;
 public:
     Contact(): Contact(QString(), QString()){};
     Contact(QString firstname, QString lastname);
-    Contact(const Contact& contact): Contact(contact.firstname, contact.lastname){};
+    Contact(QString id, QString firstname, QString lastname);
+    Contact(const Contact& contact): Contact(contact.id, contact.firstname, contact.lastname){};
     ~Contact(){};
 
+    QString getId() const { return id;}
     QString getFirstname() const {return firstname;}
     QString getLastname() const {return lastname;}
 };

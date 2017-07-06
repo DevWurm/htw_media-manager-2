@@ -7,10 +7,11 @@
 #include <QString>
 #include <QDomDocument>
 #include <QXmlStreamWriter>
-#include <QFile>
 #include "../exceptions/Exception.h"
 
-template <class T>
+using namespace std;
+
+template<class T>
 class AbstractXMLModelSerializer {
 private:
     QString modelTag;
@@ -24,36 +25,28 @@ public:
     AbstractXMLModelSerializer(
         QString modelTag,
         QString itemTag
-    ): modelTag(modelTag), itemTag(itemTag) {};
+    ) : modelTag(modelTag), itemTag(itemTag) {};
 
-    void serialize(QList<T> &source, QFile &dest);
-    void deserialize(QFile &source, QList<T> &dest);
+    void serialize(QList <T> &source, QXmlStreamWriter &dest);
+    void deserialize(QDomDocument &source, QList <T> &dest);
 };
 
-template <class T>
-void AbstractXMLModelSerializer<T>::serialize(QList <T> &source, QFile &dest) {
-    QXmlStreamWriter xml;
-    xml.setDevice(&dest);
-
-    xml.writeStartElement(modelTag);
+template<class T>
+void AbstractXMLModelSerializer<T>::serialize(QList <T> &source, QXmlStreamWriter &dest) {
+    dest.writeStartElement(modelTag);
 
     for (T &item: source) {
-        xml.writeStartElement(itemTag);
-        writeItem(xml, item);
-        xml.writeEndElement();
+        dest.writeStartElement(itemTag);
+        writeItem(dest, item);
+        dest.writeEndElement();
     }
 
-    xml.writeEndElement();
+    dest.writeEndElement();
 }
 
-template <class T>
-void AbstractXMLModelSerializer<T>::deserialize(QFile &source, QList <T> &dest) {
-    QDomDocument doc;
-
-    if(!doc.setContent(&source))
-        throw Exception("Could not parse XML");
-
-    QDomNodeList modelNodes = doc.elementsByTagName(modelTag);
+template<class T>
+void AbstractXMLModelSerializer<T>::deserialize(QDomDocument &source, QList <T> &dest) {
+    QDomNodeList modelNodes = source.elementsByTagName(modelTag);
     for (int i = 0; i < modelNodes.size(); i++) {
         QDomNodeList itemNodes = modelNodes.item(i).toElement().elementsByTagName(itemTag);
         for (int j = 0; j < itemNodes.size(); j++) {

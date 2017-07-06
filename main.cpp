@@ -9,7 +9,7 @@
 #include "controllers/MediaController.h"
 #include "delegates/ContactsComboboxDelegate.h"
 #include "exceptions/Exception.h"
-#include "serialization/ContactXMLSerializer.h"
+#include "serialization/ApplicationModelSerializer.h"
 #include <QList>
 #include <QFile>
 #include <memory>
@@ -19,16 +19,14 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     QList<shared_ptr<Contact>> contactsData;
-    ContactXMLSerializer contactXMLSerializer("contacts", "contact");
+    QList<shared_ptr<Medium>> mediaData;
+    ApplicationModelSerializer applicationModelSerializer(contactsData, mediaData);
 
     try {
         QFile dataFile("htw-media-manager-data.xml");
-        if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
-            throw Exception("Could not open data file");
-
-        contactXMLSerializer.deserialize(dataFile, contactsData);
+        applicationModelSerializer.deserialize(dataFile);
     } catch (Exception e) {
-        cerr << e.what();
+        cerr << e.what() << endl;
         return 1;
     }
 
@@ -41,7 +39,6 @@ int main(int argc, char* argv[]) {
     ContactsController contactsController(ui, contactsModel);
     ui.contacts_table->setModel(&contactsModel);
 
-    QList<shared_ptr<Medium>> mediaData;
     MediumTableModel mediaModel(mediaData);
     MediaController mediaController(ui, mediaModel);
     ui.media_table->setModel(&mediaModel);
@@ -54,12 +51,9 @@ int main(int argc, char* argv[]) {
 
     try {
         QFile dataFile("htw-media-manager-data.xml");
-        if (!dataFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-            throw Exception("Could not open data file");
-
-        contactXMLSerializer.serialize(contactsData, dataFile);
+        applicationModelSerializer.serialize(dataFile);
     } catch (Exception e) {
-        cerr << e.what();
+        cerr << e.what() << endl;
         return 2;
     }
 
