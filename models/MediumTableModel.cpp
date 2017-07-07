@@ -90,6 +90,7 @@ bool MediumTableModel::setData(const QModelIndex &index, const QVariant &value, 
 }
 
 Qt::ItemFlags MediumTableModel::flags(const QModelIndex &index) const {
+    // make column 4 (borrower) editable to allow the borrower association
     if (index.column() != 4)
         return QAbstractItemModel::flags(index);
 

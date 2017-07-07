@@ -42,6 +42,8 @@ QWidget *ContactsComboboxDelegate::createEditor(QWidget *parent,
 }
 
 void ContactsComboboxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
+    // set the value of the dropdown list to 'none' if the medium isn't borrowed and to the name
+    // of the borrower otherwise
     QComboBox *comboBox = static_cast<QComboBox *>(editor);
 
     const QVariant &valueVariant = index.model()->data(index, Qt::EditRole);
@@ -57,6 +59,8 @@ void ContactsComboboxDelegate::setEditorData(QWidget *editor, const QModelIndex 
 void ContactsComboboxDelegate::setModelData(QWidget *editor,
                                             QAbstractItemModel *model,
                                             const QModelIndex &index) const {
+    // update the mediums borrower property with the contact with the given name
+
     QComboBox *comboBox = static_cast<QComboBox *>(editor);
     QString name = comboBox->currentText();
 

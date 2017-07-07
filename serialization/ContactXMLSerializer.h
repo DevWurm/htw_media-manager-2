@@ -28,6 +28,9 @@
 
 using namespace std;
 
+/**
+ * Implementation of an AbstractXMLModelSerializer for Contact model data
+ */
 class ContactXMLSerializer: public AbstractXMLModelSerializer<shared_ptr<Contact>> {
 protected:
     void writeItem(QXmlStreamWriter &xmlStreamWriter, const shared_ptr<Contact> &item);
@@ -35,7 +38,19 @@ protected:
 
 public:
     ContactXMLSerializer(QString modelTag, QString itemTag): AbstractXMLModelSerializer(modelTag, itemTag) {};
+
+    /**
+     * Static method for serializing a contact item into a XML stream
+     * @param xmlStreamWriter The target XML stream
+     * @param item The source item
+     */
     static void writeContactItem(QXmlStreamWriter &xmlStreamWriter, Contact &item);
+
+    /**
+     * Static method for deserializing a Contact from a Dom Node
+     * @param itemNode The items DOM node
+     * @return The deserialized Contact
+     */
     static Contact readContactItem(QDomNode &itemNode);
 };
 

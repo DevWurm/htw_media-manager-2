@@ -27,14 +27,29 @@
 
 using namespace std;
 
+/**
+ * Abstract base class for serializing list based model data into XML
+ * @tparam T The model type
+ */
 template<class T>
 class AbstractXMLModelSerializer {
 private:
-    QString modelTag;
-    QString itemTag;
+    QString modelTag; // The name of the model root tag
+    QString itemTag; // The name of each items tag
 
 protected:
+    /**
+     * Virtual method, providing the implementation of serializing a single item at the writers position
+     * @param xmlStreamWriter The correctly pointed QXmlStreamWriter
+     * @param item The item to serialize
+     */
     virtual void writeItem(QXmlStreamWriter &xmlStreamWriter, const T &item) = 0;
+
+    /**
+     * Virtual method, providing the implementation of deserializing a single item from the DomNode
+     * @param itemNode The QDomNode of the item
+     * @return The deserialized item
+     */
     virtual T readItem(QDomNode &itemNode) = 0;
 
 public:
@@ -43,7 +58,18 @@ public:
         QString itemTag
     ) : modelTag(modelTag), itemTag(itemTag) {};
 
+    /**
+     * Serialize model data into the XML stream
+     * @param source The model data to serialize
+     * @param dest The destination XML stream
+     */
     void serialize(QList <T> &source, QXmlStreamWriter &dest);
+
+    /**
+     * Deserialize an DomDocument into model data
+     * @param source The DomDocument to deserialize
+     * @param dest The destination model data
+     */
     void deserialize(QDomDocument &source, QList <T> &dest);
 };
 

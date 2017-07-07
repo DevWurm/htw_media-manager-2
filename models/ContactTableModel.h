@@ -21,12 +21,15 @@
 #ifndef HTW_MEDIA_MANAGER_2_CONTACTTABLEMODEL_H
 
 #include <memory>
-
+#include <QObject>
 #include "domain/Contact.h"
 #include "AbstractListModel.h"
 
 using namespace std;
 
+/**
+ * Implementation of the AbstractListModel for the Contacts view
+ */
 class ContactTableModel: public AbstractListModel<Contact> {
 public:
     ContactTableModel(QList <shared_ptr<Contact>> &model, QObject *parent = 0) : AbstractListModel<Contact>(model, parent) {};

@@ -27,12 +27,16 @@
 
 using namespace std;
 
+/**
+ * Abstract base class for a domain model for an Medium entity
+ * The specific type of the Medium can be determined by the virtual getType method
+ */
 class Medium {
 private:
     const QString title;
     const QString creator;
     const int year;
-    QVariant borrower;
+    QVariant borrower; // QVariant is used for the borrower, because it can represent an optional value easily
 public:
     Medium(QString title, QString creator, int year);
     Medium(QString title, QString creator, int year, Contact borrower);

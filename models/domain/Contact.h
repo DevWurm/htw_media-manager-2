@@ -26,6 +26,9 @@
 
 using namespace std;
 
+/**
+ * Domain model for a Contact entity
+ */
 class Contact {
 private:
     const QString id;
@@ -36,13 +39,13 @@ public:
     Contact(QString firstname, QString lastname);
     Contact(QString id, QString firstname, QString lastname);
     Contact(const Contact& contact): Contact(contact.id, contact.firstname, contact.lastname){};
-    ~Contact(){};
+    ~Contact(){}; // Destructor is necessary for using Contact as a Value of QVariant
 
     QString getId() const { return id;}
     QString getFirstname() const {return firstname;}
     QString getLastname() const {return lastname;}
 };
 
-Q_DECLARE_METATYPE(Contact);
+Q_DECLARE_METATYPE(Contact); // Necessary for using Contact as a Value of QVariant
 
 #endif //HTW_MEDIA_MANAGER_2_CONTACT_H

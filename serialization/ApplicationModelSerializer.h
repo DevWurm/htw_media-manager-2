@@ -28,6 +28,9 @@
 #include "ContactXMLSerializer.h"
 #include "MediumXMLSerializer.h"
 
+/**
+ * Class for serializing/deserializing the application model data into a file
+ */
 class ApplicationModelSerializer {
 private:
     QList <shared_ptr<Contact>> &contactsModel;
@@ -45,7 +48,16 @@ public:
         mediumXmlSerializer(contactsModel, "media", "medium")
     {};
 
+    /**
+     * Serialize the current applications model data into to a destination file
+     * @param dest The destination file
+     */
     void serialize(QFile &dest);
+
+    /**
+     * Deserialize the content of the source file into the current application model data
+     * @param source The source file
+     */
     void deserialize(QFile &source);
 };
 

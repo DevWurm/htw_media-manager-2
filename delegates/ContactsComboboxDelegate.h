@@ -19,12 +19,20 @@
 */
 
 #ifndef HTW_MEDIA_MANAGER_2_CONTACTSCOMBOBOXDELEGATE_H
-#include <QStyledItemDelegate>
+#include <QStyledItemelegate>
+#include <QWidget>
+#include <QStyleOptionViewItem>
+#include <QModelIndex>
+#include <QAbstractItemModel>
 #include <memory>
 #include "../models/domain/Contact.h"
 
 using namespace std;
 
+/**
+ * QT Delegate for providing a dropdown list editor for the borrower attribute of a medium, containing all existing contacts
+ * and the option 'none'
+ */
 class ContactsComboboxDelegate: public QStyledItemDelegate {
     Q_OBJECT;
 private:

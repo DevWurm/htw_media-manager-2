@@ -23,6 +23,9 @@
 #include "domain/Medium.h"
 #include "AbstractListModel.h"
 
+/**
+ * Implementation of the AbstractListModel for the Media view
+ */
 class MediumTableModel: public AbstractListModel<Medium> {
 public:
     MediumTableModel(QList<shared_ptr<Medium>> &model, QObject *parent = 0) : AbstractListModel<Medium>(model, parent) {};

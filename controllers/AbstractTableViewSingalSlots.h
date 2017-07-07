@@ -23,11 +23,21 @@
 
 #include <QObject>
 
+/**
+ * QT Signals and Slots for the AbstractTableViewController template class
+ */
 class AbstractTableViewSignalSlots: public QObject {
     Q_OBJECT;
 public slots:
+    /**
+     * Add an item from the form to a model
+     */
     virtual void addItem() = 0;
-    virtual void deleteItems() = 0;
+
+    /**
+     * Trigger the deletion of the selected item
+     */
+    virtual void deleteItem() = 0;
 };
 
 #endif //HTW_MEDIA_MANAGER_2_ABSTRACTTABLEVIEWSINGALSLOTS_H

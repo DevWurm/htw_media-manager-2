@@ -25,6 +25,9 @@
 
 using namespace std;
 
+/**
+ * A simple string message based Exception class
+ */
 class Exception: public exception {
 protected:
     string msg;

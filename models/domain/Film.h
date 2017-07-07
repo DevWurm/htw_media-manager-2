@@ -25,6 +25,9 @@
 #include "Contact.h"
 #include <QString>
 
+/**
+ * Domain model for a medium of the type Film
+ */
 class Film: public Medium {
 public:
     Film(QString title, QString creator, int year): Medium(title, creator, year) {};

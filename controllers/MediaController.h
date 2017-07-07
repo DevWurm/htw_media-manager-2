@@ -25,12 +25,15 @@
 #include <QDateEdit>
 #include <QComboBox>
 #include <QObject>
-
 #include "AbstractTableViewController.h"
 #include "../models/domain/Medium.h"
 #include "../ui_media-manager.h"
 
+/**
+ * Controller for the media TableView and the corresponding form
+ */
 class MediaController: public AbstractTableViewController<Medium> {
+    Q_OBJECT;
 private:
     QLineEdit &titleInput;
     QLineEdit &creatorInput;
@@ -39,7 +42,7 @@ private:
 public:
     MediaController(
         QAbstractButton &addMediumButton,
-        QAbstractButton &deleteMediaButton,
+        QAbstractButton &deleteMediumButton,
         QLineEdit &titleInput,
         QLineEdit &creatorInput,
         QDateEdit &yearInput,
@@ -48,7 +51,7 @@ public:
         AbstractListModel<Medium> &model
     ) : AbstractTableViewController(
             addMediumButton,
-            deleteMediaButton,
+            deleteMediumButton,
             model,
             mediaTable
         ),
@@ -69,6 +72,10 @@ public:
             *(ui.media_table),
             model
         ) {};
+public slots:
+    /**
+     * Implementation of adding an item from the form to the model
+     */
     void addItem();
 };
 

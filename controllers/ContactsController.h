@@ -31,6 +31,9 @@
 #include "../models/domain/Contact.h"
 #include "../ui_media-manager.h"
 
+/**
+ * Controller for the contacts TableView and the corresponding form
+ */
 class ContactsController: public AbstractTableViewController<Contact> {
     Q_OBJECT;
 private:
@@ -38,14 +41,14 @@ private:
     QLineEdit &lastnameInput;
 public:
     ContactsController(QPushButton &addContactButton,
-                       QPushButton &deleteContactsButton,
+                       QPushButton &deleteContactButton,
                        QLineEdit &firstnameInput,
                        QLineEdit &lastnameInput,
                        QTableView &contactsTable,
                        AbstractListModel<Contact> &model
     ) : AbstractTableViewController(
             addContactButton,
-            deleteContactsButton,
+            deleteContactButton,
             model,
             contactsTable
         ),
@@ -64,6 +67,9 @@ public:
             ){};
 
 public slots:
+    /**
+     * Implementation of adding an item from the form to the model
+     */
     void addItem();
 };
 

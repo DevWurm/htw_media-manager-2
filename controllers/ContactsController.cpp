@@ -19,14 +19,13 @@
 */
 
 #include <memory>
-
 #include "../models/domain/Contact.h"
 #include "ContactsController.h"
 
 using namespace std;
 
 void ContactsController::addItem() {
-    shared_ptr <Contact> contact = make_shared<Contact>(
+    shared_ptr<Contact> contact = make_shared<Contact>(
         firstnameInput.text(),
         lastnameInput.text()
     );

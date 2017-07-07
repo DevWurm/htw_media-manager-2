@@ -40,6 +40,8 @@ void MediumXMLSerializer::writeItem(QXmlStreamWriter &xmlStreamWriter, const sha
     xmlStreamWriter.writeTextElement("year", to_string(item->getYear()).c_str());
     xmlStreamWriter.writeTextElement("type", item->getType());
 
+    // if a borrower is associated with the medium and it is still an existing contact, it is stored via an id
+    // if a borrower is associated, but isn't an existing contact (i.e. deleted), then the borrower is stored as an inline item
     if (!item->getBorrower().isNull()) {
         for (shared_ptr<Contact> contact: contactData) {
             if (contact->getId() == item->getBorrower().value<Contact>().getId()) {
@@ -65,16 +67,16 @@ shared_ptr<Medium> MediumXMLSerializer::readItem(QDomNode &itemNode) {
     if (title.isNull() || creator.isNull() || year.isNull() || type.isNull())
         throw Exception("XML is malformed: Expected medium to contain title and creator and year and type");
 
-    if (borrower.isNull()) {
+    if (borrower.isNull()) { // no borrower is associated
         return MediumXMLSerializer::createMedium(type.text(), title.text(), creator.text(), year.text().toInt());
-    } else if (borrower.firstChild().isText()) {
+    } else if (borrower.firstChild().isText()) { // the borrower is referenced via id and should be present in the contacts list
         for (shared_ptr<Contact> contact: contactData) {
             if (contact->getId() == borrower.text()) {
                 return MediumXMLSerializer::createMedium(type.text(), title.text(), creator.text(), year.text().toInt(), *contact);
             }
         }
         throw Exception("Data are inconsistent: Referenced contact is not available");
-    } else {
+    } else { // the borrower is stored as an inline item and needs to be parsed to a Contact item
         Contact borrowerContact = ContactXMLSerializer::readContactItem(borrower);
         return MediumXMLSerializer::createMedium(type.text(), title.text(), creator.text(), year.text().toInt(), borrowerContact);
     }

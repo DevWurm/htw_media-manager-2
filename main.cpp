@@ -40,12 +40,12 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    QList<shared_ptr<Contact>> contactsData;
-    QList<shared_ptr<Medium>> mediaData;
+    QList<shared_ptr<Contact>> contactsData; // contacts model data
+    QList<shared_ptr<Medium>> mediaData; // media model data
     ApplicationModelSerializer applicationModelSerializer(contactsData, mediaData);
 
     passwd* pw = getpwuid(getuid());
-    QString persistenceLocation = QString(pw->pw_dir) + QString("/.htw-media-manager-data.xml");
+    QString persistenceLocation = QString(pw->pw_dir) + QString("/.htw-media-manager-data.xml"); // location of the data file
 
     try {
         QFile dataFile(persistenceLocation);
@@ -55,19 +55,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // setup UI
     QApplication app(argc, argv);
     QMainWindow *window = new QMainWindow;
     Ui::MediaManager ui;
     ui.setupUi(window);
 
+    // setup contacts view
     ContactTableModel contactsModel(contactsData);
     ContactsController contactsController(ui, contactsModel);
     ui.contacts_table->setModel(&contactsModel);
 
+    // setup media view
     MediumTableModel mediaModel(mediaData);
     MediaController mediaController(ui, mediaModel);
     ui.media_table->setModel(&mediaModel);
-
     ContactsComboboxDelegate comboboxDelegate(contactsData);
     ui.media_table->setItemDelegateForColumn(4,&comboboxDelegate);
 

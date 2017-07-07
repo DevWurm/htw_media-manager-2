@@ -27,6 +27,7 @@
 using namespace std;
 
 void ApplicationModelSerializer::serialize(QFile &dest) {
+    // Serialize the application model data into an empty file using XML
     if (!dest.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         throw Exception("Could not open data file");
 
@@ -45,6 +46,7 @@ void ApplicationModelSerializer::serialize(QFile &dest) {
 }
 
 void ApplicationModelSerializer::deserialize(QFile &source) {
+    // Deserialize a XML file into the applications model data
     if (!source.exists() || source.size() == 0)
         return;
 

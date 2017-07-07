@@ -27,10 +27,21 @@ SOFTWARE.
 
 using namespace std;
 
+/**
+ * Implementation of an AbstractXMLModelSerializer for Medium model data
+ */
 class MediumXMLSerializer: public AbstractXMLModelSerializer<shared_ptr<Medium>> {
 private:
-    QList<shared_ptr<Contact>> &contactData;
+    QList<shared_ptr<Contact>> &contactData; // contact model data, to find the asociated borrowers
+
+    /**
+     * Helper method for constructing a medium of the specified type without a borrower
+     */
     static shared_ptr<Medium> createMedium(QString type, QString title, QString creator, int year);
+
+    /**
+     * Helper method for constructing a medium of the specified type with a borrower
+     */
     static shared_ptr<Medium> createMedium(QString type, QString title, QString creator, int year, Contact &borrower);
 protected:
     void writeItem(QXmlStreamWriter &xmlStreamWriter, const shared_ptr<Medium> &item);

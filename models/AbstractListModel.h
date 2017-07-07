@@ -26,6 +26,10 @@
 
 using namespace std;
 
+/**
+ * Abstract base class for a list based QT model for a TabelView
+ * @tparam T The type of the model data
+ */
 template <class T>
 class AbstractListModel: public QAbstractTableModel {
 protected:

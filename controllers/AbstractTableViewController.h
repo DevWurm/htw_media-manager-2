@@ -27,36 +27,43 @@
 #include "../models/AbstractListModel.h"
 #include "AbstractTableViewSingalSlots.h"
 
+/**
+ * Abstract base class for a controller which connects the model data of a TableView to corresponding form elements
+ * @tparam S The type of the model data
+ */
 template<class S>
 class AbstractTableViewController: public AbstractTableViewSignalSlots {
 protected:
     QAbstractButton &addItemButton;
-    QAbstractButton &deleteItemsButton;
+    QAbstractButton &deleteItemButton;
     AbstractListModel<S> &model;
     QTableView &table;
 public:
     AbstractTableViewController(
         QAbstractButton &addItemButton,
-        QAbstractButton &deleteItemsButton,
+        QAbstractButton &deleteItemButton,
         AbstractListModel<S> &model,
         QTableView &table
     ) : addItemButton(addItemButton),
-        deleteItemsButton(deleteItemsButton),
+        deleteItemButton(deleteItemButton),
         model(model),
         table(table) {
         QObject::connect(&addItemButton, SIGNAL(clicked()), this, SLOT(addItem()));
-        QObject::connect(&deleteItemsButton, SIGNAL(clicked()), this, SLOT(deleteItems()));
+        QObject::connect(&deleteItemButton, SIGNAL(clicked()), this, SLOT(deleteItem()));
     }
 
-    virtual void deleteItems();
+    /**
+     * Default implementation for deleting the currently selected item from the TableView
+     */
+    virtual void deleteItem();
 };
 
 template <class S>
-void AbstractTableViewController<S>::deleteItems() {
+void AbstractTableViewController<S>::deleteItem() {
     QModelIndexList selection = table.selectionModel()->selectedRows();
 
-    for (QModelIndex index: selection) {
-        model.removeRow(index.row());
+    if (selection.size() > 0) {
+        model.removeRow(selection[0].row());
     }
 };
 
