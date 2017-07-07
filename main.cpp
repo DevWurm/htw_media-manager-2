@@ -13,7 +13,9 @@
 #include <QList>
 #include <QFile>
 #include <memory>
-
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 using namespace std;
 
@@ -22,8 +24,11 @@ int main(int argc, char* argv[]) {
     QList<shared_ptr<Medium>> mediaData;
     ApplicationModelSerializer applicationModelSerializer(contactsData, mediaData);
 
+    passwd* pw = getpwuid(getuid());
+    QString persistenceLocation = QString(pw->pw_dir) + QString("/.htw-media-manager-data.xml");
+
     try {
-        QFile dataFile("htw-media-manager-data.xml");
+        QFile dataFile(persistenceLocation);
         applicationModelSerializer.deserialize(dataFile);
     } catch (Exception e) {
         cerr << e.what() << endl;
@@ -50,7 +55,7 @@ int main(int argc, char* argv[]) {
     int appCode =  app.exec();
 
     try {
-        QFile dataFile("htw-media-manager-data.xml");
+        QFile dataFile(persistenceLocation);
         applicationModelSerializer.serialize(dataFile);
     } catch (Exception e) {
         cerr << e.what() << endl;
