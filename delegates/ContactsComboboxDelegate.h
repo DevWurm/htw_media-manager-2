@@ -19,7 +19,7 @@
 */
 
 #ifndef HTW_MEDIA_MANAGER_2_CONTACTSCOMBOBOXDELEGATE_H
-#include <QStyledItemelegate>
+#include <QStyledItemDelegate>
 #include <QWidget>
 #include <QStyleOptionViewItem>
 #include <QModelIndex>
