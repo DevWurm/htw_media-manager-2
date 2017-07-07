@@ -7,12 +7,15 @@
 #include <memory>
 #include "AbstractXMLModelSerializer.h"
 #include "../models/domain/Medium.h"
+#include "../models/domain/Contact.h"
 
 using namespace std;
 
 class MediumXMLSerializer: public AbstractXMLModelSerializer<shared_ptr<Medium>> {
 private:
     QList<shared_ptr<Contact>> &contactData;
+    static shared_ptr<Medium> createMedium(QString type, QString title, QString creator, int year);
+    static shared_ptr<Medium> createMedium(QString type, QString title, QString creator, int year, Contact &borrower);
 protected:
     void writeItem(QXmlStreamWriter &xmlStreamWriter, const shared_ptr<Medium> &item);
     shared_ptr<Medium> readItem(QDomNode &itemNode);

@@ -19,6 +19,8 @@ protected:
 
 public:
     ContactXMLSerializer(QString modelTag, QString itemTag): AbstractXMLModelSerializer(modelTag, itemTag) {};
+    static void writeContactItem(QXmlStreamWriter &xmlStreamWriter, Contact &item);
+    static Contact readContactItem(QDomNode &itemNode);
 };
 
 #define HTW_MEDIA_MANAGER_2_CONTACTXMLSERIALIZER_H
